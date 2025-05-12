@@ -37,6 +37,7 @@ class UserController extends Controller
             'password' => 'required|min:6',
         ]);
 
+
         User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
@@ -44,5 +45,12 @@ class UserController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Пользователь успешно создан!');
+    }
+
+
+    public function showAllUsers()
+    {
+        $users = User::all();
+        return view('showAllUsers', compact('users'));
     }
 }
