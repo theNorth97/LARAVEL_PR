@@ -6,6 +6,8 @@
     <title>Все пользователи</title>
 </head>
 
+<a href="{{ route('user.create.form') }}">Создать нового Пользователя</a>
+
 <body>
     <h1>Список пользователей</h1>
     @if (session('success'))
@@ -19,9 +21,9 @@
         Email: {{ $user->email }} <br>
         Время создания записи: {{ $user->created_at }} <br>
 
-        <a href="{{ route('users.edit', $user->id) }}">Редактировать</a>
+        <a href="{{ route('update.users.edit', $user->id) }}">Редактировать</a>
 
-        <form action="{{ route('users.delete', $user->id) }}" method="POST" style="display: inline;">
+        <form action="{{ route('user.delete', $user->id) }}" method="POST" style="display: inline;">
             @csrf
             @method('DELETE')
             <button type="submit" onclick="return confirm('Точно удалить?')">Удалить</button>
@@ -30,6 +32,7 @@
         <hr>
     </div>
     @endforeach
+
 </body>
 
 </html>
