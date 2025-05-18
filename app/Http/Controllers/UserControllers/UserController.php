@@ -74,10 +74,14 @@ class UserController extends Controller
         return redirect()->route('allUsers')->with('success', 'обновлен!');
     }
 
-
     public function UpdateFormUser($id)
     {
         $user = User::findOrFail($id);
         return view('UpdateFormUser', compact('user'));
+    }
+
+    public function mainPageView()
+    {
+        return view('main-page');
     }
 }
