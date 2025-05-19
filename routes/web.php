@@ -16,7 +16,7 @@ Route::get('mainPage', [UserController::class, 'mainPageView'])->name('mainPage'
 
 // *** Главный контроллер(UserController) ***
 
-// Группа маршрутов для работы с пользователями
+// Группа маршрутов для работы с пользователями(тестовый crud)
 Route::prefix('user')->name('user.')->group(function () {
     // Отображение формы(view) (создания нового пользователя).
 
@@ -40,6 +40,8 @@ Route::delete('delete/{id}', [UserController::class, 'deleteUser'])->name('user.
 
 
 
+
+
 // *** Контроллер Регистрации(RegisterController) ***
 
 // Отображение формы(view) (Регистарации пользователя).
@@ -47,4 +49,7 @@ Route::get('register/form', [RegisterController::class, 'showRegisterForm'])->na
 // Обработка - (POST) (Регистрация пользователя).
 Route::post('register', [RegisterController::class, 'register'])->name('register');
 
-Route::get('login', [RegisterController::class, ''])->name('');
+Route::get('login', [RegisterController::class, ''])->name(''); // Маршрут вью (логин)
+Route::get('login', [RegisterController::class, ''])->name(''); // Маршрут обработка(логин)
+
+Route::get('login', [RegisterController::class, ''])->name(''); // Маршрут дашборд
