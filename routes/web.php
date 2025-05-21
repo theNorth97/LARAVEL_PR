@@ -12,29 +12,13 @@ Route::get('/', function () {
 });
 
 
-
-
 // *** Главный контроллер(UserController) ***
-
-// Группа маршрутов для работы с пользователями(тестовый crud)
-Route::prefix('user')->name('user.')->group(function () {
-    // Отображение формы(view) (создания нового пользователя).
-    Route::get('create/form', [UserController::class, 'getFormCreateUser'])->name('create.form');
-    // Обработка - (POST) (создание нового пользователя).
-    Route::post('create/user', [UserController::class, 'CreateUser'])->name('create');
-});
 Route::prefix('update')->name('update.')->group(function () {
     // Отображение формы(view) (обновления информации пользователя).
     Route::get('update/form/{id}', [UserController::class, 'UpdateFormUser'])->name('users.edit');
-
     // Обработка - (PUT) (обновления информации пользователя).
     Route::put('update/{id}', [UserController::class, 'UpdateUser'])->name('user');
 });
-// Отображение формы(view) (Списка всех пользователей).
-Route::get('allUsers', [UserController::class, 'getAllUsers'])->name('allUsers');
-// Обработка формы - (DELETE) (Удаления пользователя).
-Route::delete('delete/{id}', [UserController::class, 'deleteUser'])->name('user.delete');
-
 
 
 

@@ -9,14 +9,6 @@
 <body>
     <h1>Вход в аккаунт</h1>
 
-    @if ($errors->any())
-    <div>
-        @foreach ($errors->all() as $error)
-        <p style="color:red;">{{ $error }}</p>
-        @endforeach
-    </div>
-    @endif
-
     @if (session('success'))
     <div style="color:green;">
         {{ session('success') }}
