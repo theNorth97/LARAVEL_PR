@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\application\ApplicationController;
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
 use App\Http\Controllers\UserControllers\UserController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
-use App\Models\User;
 
 Route::get('/', function () {
     return view('welcome');
@@ -29,7 +30,7 @@ Route::post('register', [RegisterController::class, 'register'])->name('register
 
 
 // *** Контроллер Аунтификации(LoginController) ***
-Route::get('login/form', [LoginController::class, 'showLoginForm'])->name('LogForm'); // Отображение формы(view) (вход в личный кабинет пользователя).
+Route::get('login/form', [LoginController::class, 'showLoginForm'])->name('LogForm');
 Route::post('login', [LoginController::class, 'login'])->name('login'); // Обработка - (POST) (вход в личный кабинет пользователя (Аунтификация)).
 Route::post('logout', [LogoutController::class, 'logout'])->name('logout'); // Обработка - (POST) (выход в личного кабинета пользователя).
 
@@ -40,3 +41,7 @@ Route::get('/dashboard', function () {
 
 // *** Маршрут главной страницы сайта (main-page) ***
 Route::get('mainPage', [UserController::class, 'mainPageView'])->name('mainPage');
+
+// *** Контроллер заявок(ApplicationController) ***
+Route::get('application/form', [ApplicationController::class, 'showCreateForm'])->name('appForm'); // Отображение формы(view) (создание заявки).
+Route::post('application/create', [ApplicationController::class, 'store'])->name('store'); // Обработка - (POST) (создание заявки). 

@@ -21,6 +21,7 @@ return new class extends Migration
                 'subscription',
                 'other',
             ]);
+            $table->string('phone', 20);
             $table->text('description');
             $table->timestamp('finished_at')->nullable();
             $table->timestamps();

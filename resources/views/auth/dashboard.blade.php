@@ -10,6 +10,8 @@
 
     <p>Вы вошли в систему</p>
 
+    <button><a href="{{ route('appForm') }}"> создать заявку!</a></button>
+    <button><a href="{{ route('appForm') }}"> история заявок!</a></button>
     <form action="{{ route('logout') }}" method="POST">
         @csrf
         <button type="submit">Выйти</button>
@@ -28,6 +30,7 @@
         {{ session('success') }}
     </div>
     @endif
+
 </body>
 
 </html>

@@ -15,7 +15,8 @@
     <button>Создать</button>
 </form>
 
-<a href="{{ route('allUsers') }}">назад к списку</a>
+<button><a href="{{ route('LogForm') }}">login</a></button>
+
 
 @if (session('success'))
 <div>{{ session('success') }}</div>

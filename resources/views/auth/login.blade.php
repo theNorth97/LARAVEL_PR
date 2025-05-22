@@ -22,6 +22,8 @@
         <button type="submit">Войти</button>
 
     </form>
+
+    <button><a href="{{ route('regForm') }}"> регистрация</a></button>
 </body>
 
 </html>
