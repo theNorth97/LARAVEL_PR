@@ -18,7 +18,7 @@ class ApplicationController extends Controller
 
     public function showCreateForm()
     {
-        return view('application.form_create_application');
+        return view('application.form_create');
     }
 
     public function store(Request $request)
@@ -42,7 +42,8 @@ class ApplicationController extends Controller
     public function index()
     {
         $applications = ActiveRequest::all();
-        return view('название_маршрута_добавлю_потом', compact('applications'));
+        $finishedApplications = FinishedRequest::all();
+        return view('application.index', compact('applications', 'finishedApplications'));
     }
 
     public function finish($id)
@@ -60,12 +61,6 @@ class ApplicationController extends Controller
 
         $application->delete();
 
-        return redirect()->route('название_маршрута_добавлю_потом')->with('success', 'заявка завершена!');
-    }
-
-    public function finishedIndex()
-    {
-        $finishedApplications = FinishedRequest::all();
-        return view('название_маршрута_добавлю_потом', compact('finishedApplications'));
+        return redirect()->route('dashboard')->with('success', 'заявка завершена!');
     }
 }

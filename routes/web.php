@@ -45,3 +45,5 @@ Route::get('mainPage', [UserController::class, 'mainPageView'])->name('mainPage'
 // *** Контроллер заявок(ApplicationController) ***
 Route::get('application/form', [ApplicationController::class, 'showCreateForm'])->name('appForm'); // Отображение формы(view) (создание заявки).
 Route::post('application/create', [ApplicationController::class, 'store'])->name('store'); // Обработка - (POST) (создание заявки). 
+Route::get('application/index', [ApplicationController::class, 'index'])->name('appIndex'); // Отображение формы(view) (список всех активных заявок).
+Route::post('application/{id}/finish', [ApplicationController::class, 'finish'])->name('appfinish'); // Обработка - (POST) (завершение заявки). 
