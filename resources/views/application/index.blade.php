@@ -17,12 +17,17 @@
             <strong>Телефон:</strong> {{ $application->phone }}<br>
             <strong>Описание:</strong> {{ $application->description }}<br>
             <strong>Дата создания:</strong> {{ $application->created_at }}<br>
-        </div>
+            <div>
+                Я: {{ Auth::id() }} | Владелец заявки: {{ $application->user_id }}
+            </div>
 
+        </div>
+        @can('update', $application)
         <form method="POST" action="{{ route('appfinish', $application->id) }}" style="display:inline;">
             @csrf
             <button type="submit" onclick="return confirm('Точно завершить заявку?')">Завершить</button>
         </form>
+        @endcan
         <hr>
     </div>
     @endforeach

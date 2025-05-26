@@ -11,6 +11,7 @@ use App\Models\FinishedRequest;
 
 class ApplicationController extends Controller
 {
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -41,14 +42,16 @@ class ApplicationController extends Controller
 
     public function index()
     {
-        $applications = ActiveRequest::all();
-        $finishedApplications = FinishedRequest::all();
+
+        $applications = Auth::user()?->activeRequests ?? collect();
+        $finishedApplications = Auth::user()?->finishedRequests ?? collect();
         return view('application.index', compact('applications', 'finishedApplications'));
     }
 
     public function finish($id)
     {
         $application = ActiveRequest::findOrFail($id);
+        $this->authorize('update', $application);
 
         $FinishedApplication =  FinishedRequest::create([
             'user_id' => $application->user_id,

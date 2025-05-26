@@ -11,11 +11,13 @@ class ActiveRequest extends Model
     {
         return $this->belongsTo(User::class);
     }
+
     protected $fillable = [
         'user_id',
         'service_name',
         'phone',
         'description',
         'finished_at',
+        'created_at'
     ];
 }

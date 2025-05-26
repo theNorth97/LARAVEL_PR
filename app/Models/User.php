@@ -46,18 +46,18 @@ class User extends Authenticatable
         ];
     }
 
-    public function activeRequest()
+    public function activeRequests()
     {
-        return $this->hasMany('ActiveRequest::class');
+        return $this->hasMany(ActiveRequest::class);
     }
 
-    public function finishedRequest()
+    public function finishedRequests()
     {
-        return $this->hasMany('FinishedRequest::class');
+        return $this->hasMany(FinishedRequest::class);
     }
 
-    public function subscription()
+    public function subscriptions()
     {
-        return $this->hasMany('Subscription::class');
+        return $this->hasMany(Subscription::class);
     }
 }
