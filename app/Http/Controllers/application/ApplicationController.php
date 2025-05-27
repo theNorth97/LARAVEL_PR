@@ -42,7 +42,6 @@ class ApplicationController extends Controller
 
     public function index()
     {
-
         $applications = Auth::user()?->activeRequests ?? collect();
         $finishedApplications = Auth::user()?->finishedRequests ?? collect();
         return view('application.index', compact('applications', 'finishedApplications'));
@@ -66,4 +65,6 @@ class ApplicationController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'заявка завершена!');
     }
+
+    public function noName() {}
 }

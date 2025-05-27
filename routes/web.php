@@ -51,5 +51,3 @@ Route::post('application/{id}/finish', [ApplicationController::class, 'finish'])
 // *** Контроллер подписок(подпискиController) ***
 // Route::get('', [Controller::class, ''])->name('m'); // Отображение формы(view) (создание заявки).
 // Route::post('', [Controller::class, ''])->name(''); // Обработка - (POST) (создание заявки). 
-// Route::get('', [Controller::class, ''])->name(''); // Отображение формы(view) (список всех активных заявок).
-// Route::post('', [Controller::class, ''])->name(''); // Обработка - (POST) (завершение заявки)
