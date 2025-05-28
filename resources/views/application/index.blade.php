@@ -17,9 +17,6 @@
             <strong>Телефон:</strong> {{ $application->phone }}<br>
             <strong>Описание:</strong> {{ $application->description }}<br>
             <strong>Дата создания:</strong> {{ $application->created_at }}<br>
-            <div>
-                Я: {{ Auth::id() }} | Владелец заявки: {{ $application->user_id }}
-            </div>
 
         </div>
         @can('update', $application)
@@ -35,15 +32,14 @@
 
     <h1>Список завершенных заявок</h1>
 
-
     @foreach ($finishedApplications as $finishedApplication)
-    <div class="finishedApplication">
-        <div class="finishedApplication-description">
+    <div class="application">
+        <div class="application-description">
             <strong>ID(сделать айди чтобы был тот же что и в активной заявке):</strong> {{ $finishedApplication->id }}<br>
             <strong>Услуга:</strong> {{ $finishedApplication->service_name }}<br>
             <strong>Телефон:</strong> {{ $finishedApplication->phone }}<br>
             <strong>Описание:</strong> {{ $finishedApplication->description }}<br>
-            <strong>Дата завершения:</strong> {{ $finishedApplication->finished_at }}<br>
+            <strong>Дата завершения:</strong> {{ $finishedApplication->update_at }}<br>
         </div>
         <hr>
     </div>

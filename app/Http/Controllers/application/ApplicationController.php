@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\ActiveRequest;
-use App\Models\FinishedRequest;
 
 
 class ApplicationController extends Controller
@@ -42,8 +41,9 @@ class ApplicationController extends Controller
 
     public function index()
     {
-        $applications = Auth::user()?->activeRequests ?? collect();
-        $finishedApplications = Auth::user()?->finishedRequests ?? collect();
+        $applications = Auth::user()->activeRequests()->where('status', 'active')->get();
+        $finishedApplications = Auth::user()->activeRequests()->where('status', 'finished')->get();
+
         return view('application.index', compact('applications', 'finishedApplications'));
     }
 
@@ -52,19 +52,10 @@ class ApplicationController extends Controller
         $application = ActiveRequest::findOrFail($id);
         $this->authorize('update', $application);
 
-        $FinishedApplication =  FinishedRequest::create([
-            'user_id' => $application->user_id,
-            'service_name' => $application->service_name,
-            'phone' => $application->phone,
-            'description' => $application->description,
-            'finished_at' => now(),
-            'created_at' => $application->created_at,
+        $application->update([
+            'status' => 'finished',
         ]);
-
-        $application->delete();
 
         return redirect()->route('dashboard')->with('success', 'заявка завершена!');
     }
-
-    public function noName() {}
 }

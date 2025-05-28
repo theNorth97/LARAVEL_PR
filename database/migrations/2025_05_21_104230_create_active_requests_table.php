@@ -23,7 +23,12 @@ return new class extends Migration
             ]);
             $table->string('phone', 20);
             $table->text('description');
-            $table->timestamp('finished_at')->nullable();
+            $table->enum('status', [
+                'active',
+                'in_progres',
+                'finished',
+                'cancelled',
+            ])->default('active');
             $table->timestamps();
         });
     }

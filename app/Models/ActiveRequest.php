@@ -17,6 +17,7 @@ class ActiveRequest extends Model
         'service_name',
         'phone',
         'description',
+        'status',
         'finished_at',
         'created_at'
     ];
