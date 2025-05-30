@@ -19,6 +19,5 @@ class ActiveRequest extends Model
         'description',
         'status',
         'finished_at',
-        'created_at'
     ];
 }

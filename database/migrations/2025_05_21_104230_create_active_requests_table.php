@@ -25,7 +25,7 @@ return new class extends Migration
             $table->text('description');
             $table->enum('status', [
                 'active',
-                'in_progres',
+                'in_progress',
                 'finished',
                 'cancelled',
             ])->default('active');
