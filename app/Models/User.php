@@ -51,8 +51,8 @@ class User extends Authenticatable
         return $this->hasMany(ActiveRequest::class);
     }
 
-    public function subscriptions()
-    {
-        return $this->hasMany(Subscription::class);
-    }
+    // public function subscriptions()
+    // {
+    //     return $this->hasMany(Subscription::class);
+    // }
 }

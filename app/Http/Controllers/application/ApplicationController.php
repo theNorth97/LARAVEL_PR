@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\application;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateUserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\ActiveRequest;
@@ -16,9 +17,14 @@ class ApplicationController extends Controller
         $this->middleware('auth');
     }
 
-    public function showCreateForm()
+    public function showCreateForm(CreateUserRequest $request)
     {
-        return view('application.form_create');
+        if (isset($request->rights['can_create_aplication']) && $request->rights['can_create_aplication']) {
+            return view('application.form_create');
+        };
+
+        return view('login');
+        // будет прилетать реквест с правами ( если есть право смотреть то показываем вью , если нету  то 403)
     }
 
     public function store(Request $request)
@@ -51,6 +57,7 @@ class ApplicationController extends Controller
     {
         $application = ActiveRequest::findOrFail($id);
         $this->authorize('update', $application);
+        dd('1');
 
         $application->update([
             'status' => 'finished',
