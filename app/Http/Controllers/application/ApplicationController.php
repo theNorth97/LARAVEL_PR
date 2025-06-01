@@ -23,8 +23,8 @@ class ApplicationController extends Controller
             return view('application.form_create');
         };
 
-        return view('login');
-        // будет прилетать реквест с правами ( если есть право смотреть то показываем вью , если нету  то 403)
+        return redirect()->route('dashboard')->with('warning', 'Доступ к созданию заявки ограничен');
+        // будет прилетать реквест с правами ( если есть право смотреть то показываем вью , если нету то 403)
     }
 
     public function store(Request $request)
@@ -57,7 +57,6 @@ class ApplicationController extends Controller
     {
         $application = ActiveRequest::findOrFail($id);
         $this->authorize('update', $application);
-        dd('1');
 
         $application->update([
             'status' => 'finished',

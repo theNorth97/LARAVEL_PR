@@ -43,9 +43,28 @@
         </div>
         <hr>
     </div>
+
     @endforeach
 
     <a href="{{ url()->previous() }}">Назад</a>
+
+    @if ($errors->any())
+    <div>
+        @foreach ($errors->all() as $error)
+        <p style="color:red;">{{ $error }}</p>
+        @endforeach
+    </div>
+    @endif
+
+    @if (session('success'))
+    <div style="color:green;"> {{ session('success') }}
+    </div>
+    @endif
+
+    @if (session('success'))
+    <div style="color:green;"> {{ session('success') }}
+    </div>
+    @endif
 
 </body>
 

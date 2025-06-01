@@ -19,8 +19,6 @@
         <button type="submit">Выйти</button>
     </form>
 
-
-
     @if ($errors->any())
     <div>
         @foreach ($errors->all() as $error)
@@ -30,9 +28,12 @@
     @endif
 
     @if (session('success'))
-    <div style="color:green;">
-        {{ session('success') }}
+    <div style="color:green;"> {{ session('success') }}
     </div>
+    @endif
+
+    @if(session('warning'))
+    <div style="color:orange;">{{ session('warning') }}</div>
     @endif
 
 </body>
