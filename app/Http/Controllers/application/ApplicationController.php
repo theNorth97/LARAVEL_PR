@@ -24,8 +24,10 @@ class ApplicationController extends Controller
         };
 
         return redirect()->route('dashboard')->with('warning', 'Доступ к созданию заявки ограничен');
-        // будет прилетать реквест с правами ( если есть право смотреть то показываем вью , если нету то 403)
+        // будет прилетать реквест с правами ( если есть право "смотреть" то показываем вью , если нету то 403)
     }
+
+    //service сделать , проверить будет ли политик работать через него.
 
     public function store(Request $request)
     {
@@ -62,6 +64,18 @@ class ApplicationController extends Controller
             'status' => 'finished',
         ]);
 
-        return redirect()->route('dashboard')->with('success', 'заявка завершена!');
+        return redirect()->route('dashboard')->with('success', 'заявка завершена');
+    }
+
+    public function finish1($id)
+    {
+        $application = ActiveRequest::findOrFail($id);
+        $this->authorize('update', $application);
+
+        $application->update([
+            'status' => 'finished',
+        ]);
+
+        return redirect()->route('dashboard')->with('success', 'заявка завершена');
     }
 }
