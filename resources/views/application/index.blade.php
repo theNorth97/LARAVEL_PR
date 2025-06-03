@@ -39,7 +39,7 @@
             <strong>Услуга:</strong> {{ $finishedApplication->service_name }}<br>
             <strong>Телефон:</strong> {{ $finishedApplication->phone }}<br>
             <strong>Описание:</strong> {{ $finishedApplication->description }}<br>
-            <strong>Дата завершения:</strong> {{ $finishedApplication->update_at }}<br>
+            <strong>Дата завершения:</strong> {{ $finishedApplication->updated_at }}<br>
         </div>
         <hr>
     </div>
@@ -53,11 +53,6 @@
         @foreach ($errors->all() as $error)
         <p style="color:red;">{{ $error }}</p>
         @endforeach
-    </div>
-    @endif
-
-    @if (session('success'))
-    <div style="color:green;"> {{ session('success') }}
     </div>
     @endif
 

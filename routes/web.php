@@ -23,7 +23,6 @@ Route::prefix('update')->name('update.')->group(function () {
 
 
 
-
 // *** Контроллер Регистрации(RegisterController) ***
 Route::get('register/form', [RegisterController::class, 'showRegisterForm'])->name('regForm'); // Отображение формы(view) (Регистарации пользователя).
 Route::post('register', [RegisterController::class, 'register'])->name('register'); // Обработка - (POST) (Регистрация пользователя).
@@ -47,7 +46,3 @@ Route::get('application/form', [ApplicationController::class, 'showCreateForm'])
 Route::post('application/create', [ApplicationController::class, 'store'])->name('store'); // Обработка - (POST) (создание заявки). 
 Route::get('application/index', [ApplicationController::class, 'index'])->name('appIndex'); // Отображение формы(view) (список всех активных заявок).
 Route::post('application/{id}/finish', [ApplicationController::class, 'finish'])->name('appfinish'); // Обработка - (POST) (завершение заявки). 
-
-// *** Контроллер подписок(подпискиController) ***
-// Route::get('', [Controller::class, ''])->name('m'); // Отображение формы(view) (создание заявки).
-// Route::post('', [Controller::class, ''])->name(''); // Обработка - (POST) (создание заявки). 

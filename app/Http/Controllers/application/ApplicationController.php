@@ -4,78 +4,39 @@ namespace App\Http\Controllers\application;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\StoreApplicationRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\ActiveRequest;
-
+use App\Services\ApplicationService;
 
 class ApplicationController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    public function showCreateForm(CreateUserRequest $request)
+    public function showCreateForm(CreateUserRequest $request, ApplicationService $service)
     {
-        if (isset($request->rights['can_create_aplication']) && $request->rights['can_create_aplication']) {
-            return view('application.form_create');
-        };
-
-        return redirect()->route('dashboard')->with('warning', 'Доступ к созданию заявки ограничен');
-        // будет прилетать реквест с правами ( если есть право "смотреть" то показываем вью , если нету то 403)
+        $this->authorize('create', ActiveRequest::class);
+        return $service->showCreateForm($request);
     }
 
-    //service сделать , проверить будет ли политик работать через него.
-
-    public function store(Request $request)
+    public function store(StoreApplicationRequest $request, ApplicationService $service)
     {
-        $validated = $request->validate([
-            'service_name' => 'required',
-            'phone' => 'required|regex:/^[\d\+\-\(\)\s]+$/|min:6|max:20',
-            'description' => 'required',
-        ]);
-
-        ActiveRequest::create([
-            'user_id' => Auth::id(),
-            'service_name' => $validated['service_name'],
-            'phone' => $validated['phone'],
-            'description' => $validated['description'],
-        ]);
-
-        return redirect()->route('dashboard')->with('success', 'заявка успешно создана');
+        return $service->store($request);
     }
 
-    public function index()
+    public function index(ApplicationService $service)
     {
-        $applications = Auth::user()->activeRequests()->where('status', 'active')->get();
-        $finishedApplications = Auth::user()->activeRequests()->where('status', 'finished')->get();
-
-        return view('application.index', compact('applications', 'finishedApplications'));
+        return $service->index();
     }
 
-    public function finish($id)
+    public function finish($id, ApplicationService $service)
     {
         $application = ActiveRequest::findOrFail($id);
         $this->authorize('update', $application);
 
-        $application->update([
-            'status' => 'finished',
-        ]);
-
-        return redirect()->route('dashboard')->with('success', 'заявка завершена');
-    }
-
-    public function finish1($id)
-    {
-        $application = ActiveRequest::findOrFail($id);
-        $this->authorize('update', $application);
-
-        $application->update([
-            'status' => 'finished',
-        ]);
-
-        return redirect()->route('dashboard')->with('success', 'заявка завершена');
+        return $service->finish($application);
     }
 }

@@ -10,7 +10,10 @@
 
     <p>Вы вошли в систему</p>
 
-    <button><a href="{{ route('appForm') }}"> создать заявку!</a></button>
+    @can('create', App\Models\ActiveRequest::class)
+    <a href="{{ route('appForm') }}" class="btn">Создать заявку!</a>
+    @endcan
+
     <button><a href="{{ route('appIndex') }}"> история заявок!</a></button>
 
 

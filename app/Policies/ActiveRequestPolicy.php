@@ -29,7 +29,8 @@ class ActiveRequestPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        // dd($user->rights->pluck('name'));
+        return $user->rights->contains('name', 'can_create_appplication');
     }
 
     /**
@@ -37,7 +38,9 @@ class ActiveRequestPolicy
      */
     public function update(User $user, ActiveRequest $activeRequest): bool
     {
-        return $user->id === $activeRequest->user_id;
+
+        return $user->id === $activeRequest->user_id
+            && $user->rights->contains('name', 'can_view_apppllications');
     }
 
     /**

@@ -53,6 +53,6 @@ class User extends Authenticatable
 
     public function rights()
     {
-        return $this->belongsToMany(ActiveRequest::class);
+        return $this->belongsToMany(Right::class, 'user_right');
     }
 }
