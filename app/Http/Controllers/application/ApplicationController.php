@@ -29,6 +29,7 @@ class ApplicationController extends Controller
 
     public function index(ApplicationService $service)
     {
+        $this->authorize('view', ActiveRequest::class);
         return $service->index();
     }
 

@@ -14,12 +14,7 @@ class ApplicationService
 {
     public function showCreateForm(CreateUserRequest $request)
     {
-        if (isset($request->rights['can_create_application']) && $request->rights['can_create_application']) {
-            return view('application.form_create');
-        };
-
-        return redirect()->route('dashboard')->with('warning', 'Доступ к созданию заявки ограничен');
-        // будет прилетать реквест с правами ( если есть право "смотреть" то показываем вью , если нету то 403)
+        return view('application.form_create');
     }
 
     public function store(StoreApplicationRequest $request)
@@ -38,7 +33,6 @@ class ApplicationService
 
     public function index()
     {
-
         $applications = Auth::user()->activeRequests()->where('status', 'active')->get();
         $finishedApplications = Auth::user()->activeRequests()->where('status', 'finished')->get();
 
@@ -52,6 +46,5 @@ class ApplicationService
         ]);
 
         return redirect()->route('dashboard')->with('success', 'заявка завершена');
-        //сделать столбец finished  и в него переносить заверщеные заявки , а не в updated/
     }
 }

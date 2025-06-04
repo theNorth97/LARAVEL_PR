@@ -29,7 +29,6 @@
     </div>
     @endforeach
 
-
     <h1>Список завершенных заявок</h1>
 
     @foreach ($finishedApplications as $finishedApplication)

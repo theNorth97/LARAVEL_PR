@@ -11,12 +11,12 @@
     <p>Вы вошли в систему</p>
 
     @can('create', App\Models\ActiveRequest::class)
-    <a href="{{ route('appForm') }}" class="btn">Создать заявку!</a>
+    <button><a href="{{ route('appForm') }}" class="btn">Создать заявку!</a></button>
     @endcan
 
+    @can('view', App\Models\ActiveRequest::class)
     <button><a href="{{ route('appIndex') }}"> история заявок!</a></button>
-
-
+    @endcan
     <form action="{{ route('logout') }}" method="POST">
         @csrf
         <button type="submit">Выйти</button>

@@ -19,9 +19,9 @@ class ActiveRequestPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, ActiveRequest $activeRequest): bool
+    public function view(User $user): bool
     {
-        return false;
+        return $user->rights->contains('name', 'can_view_apppllications');
     }
 
     /**
@@ -29,8 +29,7 @@ class ActiveRequestPolicy
      */
     public function create(User $user): bool
     {
-        // dd($user->rights->pluck('name'));
-        return $user->rights->contains('name', 'can_create_appplication');
+        return $user->rights->contains('name', 'can_create_apppllication');
     }
 
     /**
@@ -38,9 +37,8 @@ class ActiveRequestPolicy
      */
     public function update(User $user, ActiveRequest $activeRequest): bool
     {
-
         return $user->id === $activeRequest->user_id
-            && $user->rights->contains('name', 'can_view_apppllications');
+            && $user->rights->contains('name', 'can_create_apppllication');
     }
 
     /**

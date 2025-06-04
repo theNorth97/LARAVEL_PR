@@ -13,9 +13,7 @@ class CreateUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        $this->rights['can_create_application'] = true;
-        return true; // с бд тяну права(с таблицы ) //  
-        // научиться все права юзера 
+        return true;
     }
 
     /**
