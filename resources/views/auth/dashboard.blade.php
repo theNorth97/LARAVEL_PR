@@ -42,3 +42,6 @@
 </body>
 
 </html>
+@if(session('warning'))
+<div style="color:orange;">{{ session('warning') }}</div>
+@endif

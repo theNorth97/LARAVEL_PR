@@ -21,7 +21,7 @@ class ActiveRequestPolicy
      */
     public function view(User $user): bool
     {
-        return $user->rights->contains('name', 'can_view_apppllications');
+        return $user->rights->contains('name', 'can_view_apppllications'); //права на просмотр списка заявок ( кнопка заявки) 
     }
 
     /**
@@ -29,7 +29,7 @@ class ActiveRequestPolicy
      */
     public function create(User $user): bool
     {
-        return $user->rights->contains('name', 'can_create_apppllication');
+        return $user->rights->contains('name', 'can_create_apppllication'); //права на завершение заявки ( кнопка заявки) 
     }
 
     /**
@@ -38,7 +38,7 @@ class ActiveRequestPolicy
     public function update(User $user, ActiveRequest $activeRequest): bool
     {
         return $user->id === $activeRequest->user_id
-            && $user->rights->contains('name', 'can_create_apppllication');
+            && $user->rights->contains('name', 'can_create_apppllication'); //права на завершение заявки ( кнопка заявки) 
     }
 
     /**

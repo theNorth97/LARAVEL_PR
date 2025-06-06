@@ -12,7 +12,7 @@ use App\Http\Requests\StoreApplicationRequest;
 
 class ApplicationService
 {
-    public function showCreateForm(CreateUserRequest $request)
+    public function showCreateForm()
     {
         return view('application.form_create');
     }
