@@ -17,6 +17,9 @@
     @can('view', App\Models\ActiveRequest::class)
     <button><a href="{{ route('appIndex') }}"> история заявок!</a></button>
     @endcan
+
+    <button><a href="{{ route('rightForm') }}"> права</a></button>
+
     <form action="{{ route('logout') }}" method="POST">
         @csrf
         <button type="submit">Выйти</button>
@@ -40,8 +43,3 @@
     @endif
 
 </body>
-
-</html>
-@if(session('warning'))
-<div style="color:orange;">{{ session('warning') }}</div>
-@endif

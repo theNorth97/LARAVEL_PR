@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\application;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\StoreApplicationRequest;
 use Illuminate\Http\Request;
 use App\Models\ActiveRequest;
@@ -16,15 +15,18 @@ class ApplicationController extends Controller
         $this->middleware('auth');
     }
 
-    public function showCreateForm(CreateUserRequest $request, ApplicationService $service)
+    public function showCreateForm(ApplicationService $service)
     {
         $this->authorize('create', ActiveRequest::class);
-        return $service->showCreateForm($request);
+        return $service->showCreateForm();
     }
 
     public function store(StoreApplicationRequest $request, ApplicationService $service)
     {
-        return $service->store($request);
+        $validated = $request->validated();
+        $validated['user_id'] = $request->user()->id;
+        $service->store($validated);
+        return redirect()->route('dashboard')->with('success', 'заявка успешно создана');
     }
 
     public function index(ApplicationService $service)
@@ -39,5 +41,15 @@ class ApplicationController extends Controller
         $this->authorize('update', $application);
 
         return $service->finish($application);
+    }
+
+    public function showRightForm()
+    {
+        return view('rights.right');
+    }
+
+    public function rights()
+    {
+        return true;
     }
 }

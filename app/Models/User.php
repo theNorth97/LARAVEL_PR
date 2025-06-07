@@ -46,6 +46,9 @@ class User extends Authenticatable
         ];
     }
 
+    // массив сделать со всеми правами (права юзера) 
+    // получить права - и найти есть ли оно. 
+
     public function activeRequests()
     {
         return $this->hasMany(ActiveRequest::class);

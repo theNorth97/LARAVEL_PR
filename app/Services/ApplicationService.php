@@ -2,13 +2,9 @@
 
 namespace App\Services;
 
-use App\Http\Requests\CreateUserRequest;
 use App\Models\ActiveRequest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Policies\ActiveRequestPolicy;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreApplicationRequest;
+
 
 class ApplicationService
 {
@@ -17,18 +13,14 @@ class ApplicationService
         return view('application.form_create');
     }
 
-    public function store(StoreApplicationRequest $request)
+    public function store(array $validated): void
     {
-        $validated = $request->validated();
-
         ActiveRequest::create([
-            'user_id' => $request->user()->id,
+            'user_id' => $validated['user_id'],
             'service_name' => $validated['service_name'],
             'phone' => $validated['phone'],
             'description' => $validated['description'],
         ]);
-
-        return redirect()->route('dashboard')->with('success', 'заявка успешно создана');
     }
 
     public function index()
