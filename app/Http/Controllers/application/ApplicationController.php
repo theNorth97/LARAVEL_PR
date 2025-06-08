@@ -52,7 +52,7 @@ class ApplicationController extends Controller
         return view('rights.searchRightsUser');
     }
 
-    public function right(Request $request)
+    public function right(Request $request, ApplicationService $service)
     {
 
         $user = User::findOrFail($request->input('user_id'));
@@ -61,7 +61,7 @@ class ApplicationController extends Controller
 
         $user->rights()->syncWithoutDetaching([$right->id]);
 
-        return redirect()->back()->with('success', 'права добавлены!');
+        return $service->index();
         // 1. Получить пользователя
         // 2. Получить имя выбранного права из формы
         // 3. Найти право по имени (name)
