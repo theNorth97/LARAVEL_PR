@@ -40,19 +40,19 @@
             <option value="other">Другое</option>
         </select>
 
-        <br><br>
+        <br>
 
         <label for="phone">Телефон:</label>
         <input type="text" name="phone" id="phone" placeholder="Телефон" required><br>
 
         <label for="description">Описание заявки:</label>
         <textarea name="description" id="description" rows="4" required></textarea>
-
-        <br><br>
+        <br>
 
         <button type="submit">Создать заявку</button>
 
     </form>
+    <br>
     <a href="{{ url()->previous() }}">Назад</a>
 
 </body>

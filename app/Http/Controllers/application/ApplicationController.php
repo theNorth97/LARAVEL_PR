@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\application;
 
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreApplicationRequest;
 use Illuminate\Http\Request;
 use App\Models\ActiveRequest;
+use App\Models\Right;
 use App\Services\ApplicationService;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 
 class ApplicationController extends Controller
 {
@@ -45,11 +49,38 @@ class ApplicationController extends Controller
 
     public function showRightForm()
     {
+        return view('rights.searchRightsUser');
+    }
+
+    public function right(Request $request)
+    {
+
+        $user = User::findOrFail($request->input('user_id'));
+        $rightName = $request->input('right_name');
+        $right = Right::where('name', $rightName)->firstOrfail();
+
+        $user->rights()->syncWithoutDetaching([$right->id]);
+
+        return redirect()->back()->with('success', 'права добавлены!');
+        // 1. Получить пользователя
+        // 2. Получить имя выбранного права из формы
+        // 3. Найти право по имени (name)
+        // 4. Добавить это право пользователю (attach)
+        // 5. Вернуть назад или куда надо, с сообщением
+    }
+
+
+    public function showFormSearchRights()
+    {
         return view('rights.right');
     }
 
-    public function rights()
+    public function search(Request $request)
     {
-        return true;
+
+        $user = User::findOrFail($request->input('id'));
+        $rights = $user->rights;
+
+        return view('rights.right', compact('user', 'rights'));
     }
 }

@@ -47,6 +47,8 @@ Route::post('application/create', [ApplicationController::class, 'store'])->name
 Route::get('application/index', [ApplicationController::class, 'index'])->name('appIndex'); // Отображение формы(view) (список всех активных заявок).
 Route::post('application/{id}/finish', [ApplicationController::class, 'finish'])->name('appfinish'); // Обработка - (POST) (завершение заявки).
 
-
-Route::get('rights/form', [ApplicationController::class, 'showRightForm'])->name('rightForm'); // Отображение формы(view) (установка прав).
+// *** Контроллер прав (ApplicationController) ***
+Route::get('rights/search/form', [ApplicationController::class, 'showFormSearchRights'])->name('searchForm'); // Отображение формы(view) (поиск прав).
 Route::post('rights', [ApplicationController::class, 'right'])->name('rights'); // Обработка - (POST) (установка прав).
+Route::get('rights/form', [ApplicationController::class, 'showRightForm'])->name('rightForm'); // Отображение формы(view) (установка прав).
+Route::post('rights/search', [ApplicationController::class, 'search'])->name('search'); // Обработка - (POST) (поиск прав).
