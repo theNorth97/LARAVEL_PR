@@ -54,7 +54,6 @@ class ApplicationController extends Controller
 
     public function right(Request $request, ApplicationService $service)
     {
-
         $user = User::findOrFail($request->input('user_id'));
         $rightName = $request->input('right_name');
         $right = Right::where('name', $rightName)->firstOrfail();
@@ -82,5 +81,10 @@ class ApplicationController extends Controller
         $rights = $user->rights;
 
         return view('rights.right', compact('user', 'rights'));
+    }
+
+    public function deleteRight(Request $request)
+    {
+        true;
     }
 }
