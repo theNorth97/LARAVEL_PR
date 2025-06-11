@@ -5,12 +5,13 @@
     <form method="POST" action="{{ route('rightFinish', ['user' => $user->id, 'right' => $right->id]) }}" style="display:inline;">
         @csrf
         <button type="submit" onclick="return confirm('Точно удалить право?')">Удалить</button>
-        <hr>
-        @endforeach
+    </form>
+    <hr>
+    @endforeach
 </ul>
 
 <h2>Добавить права: {{ $user->name }}</h2>
-<form method="POST" action="{{ route('rights') }}">
+<form method="POST" action="{{ route('AddRight') }}">
     @csrf
 
     <input type="hidden" name="user_id" value="{{ $user->id }}">

@@ -13,9 +13,8 @@
     <div style="color:green;">{{ session('success') }}</div>
     @endif
 
-    @if (session('success'))
-    <div style="color:green;"> {{ session('success') }}
-    </div>
+    @if(session('warning'))
+    <div style="color:orange">{{ session('warning') }}</div>
     @endif
 
     @if($errors->any())

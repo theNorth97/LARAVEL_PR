@@ -55,21 +55,18 @@ class ApplicationController extends Controller
         return view('rights.searchRightsUser');
     }
 
-    public function right(Request $request)
+    public function AddRight(Request $request)
     {
         $user = User::findOrFail($request->input('user_id'));
         $rightName = $request->input('right_name');
         $right = Right::where('name', $rightName)->firstOrfail();
 
-        $user->rights()->syncWithoutDetaching([$right->id]);
-
-        return redirect()->route('rightForm')->with('success', 'Право успешно добавлено!');
-
-        // 1. Получить пользователя
-        // 2. Получить имя выбранного права из формы
-        // 3. Найти право по имени (name)
-        // 4. Добавить это право пользователю (attach)
-        // 5. Вернуть назад или куда надо, с сообщением
+        if (!$user->rights->contains('id', $right->id)) {
+            $user->rights->attach([$right->id]);
+            return redirect()->route('rightForm')->with('success', 'Право успешно добавлено!');
+        } else {
+            return redirect()->route('rightForm')->with('warning', 'У пользователя есть такое право!');
+        }
     }
 
     public function showFormSearchRights()
@@ -79,10 +76,14 @@ class ApplicationController extends Controller
 
     public function search(Request $request)
     {
-        $user = User::findOrFail($request->input('id'));
-        $rights = $user->rights;
 
-        return view('rights.right', compact('user', 'rights'));
+
+        if (User::where('id', $request->input('id'))->exists()) {
+            $user = User::findOrFail($request->input('id'));
+            $rights = $user->rights;
+            return view('rights.right', compact('user', 'rights'));
+        }
+        return redirect()->route('rightForm')->with('warning', 'Юзера с таким айди не существует!');
     }
 
     public function rightFinish($user, $right)
@@ -91,6 +92,6 @@ class ApplicationController extends Controller
         $right = Right::findOrFail($right);
         $user->rights()->detach($right->id);
 
-        return redirect()->back()->with('success', 'Право успешно удалено!');
+        return redirect()->route('rightForm')->with('success', 'Право успешно удалено');
     }
 }
