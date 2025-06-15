@@ -2,11 +2,11 @@
 
 use App\Http\Controllers\application\ApplicationController;
 use Illuminate\Support\Facades\Route;
-use App\Models\User;
 use App\Http\Controllers\UserControllers\UserController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Right\RightController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,7 +20,6 @@ Route::prefix('update')->name('update.')->group(function () {
     // Обработка - (PUT) (обновления информации пользователя).
     Route::put('update/{id}', [UserController::class, 'UpdateUser'])->name('user');
 });
-
 
 
 // *** Контроллер Регистрации(RegisterController) ***
@@ -48,28 +47,8 @@ Route::get('application/index', [ApplicationController::class, 'index'])->name('
 Route::post('application/{id}/finish', [ApplicationController::class, 'finish'])->name('appfinish'); // Обработка - (POST) (завершение заявки).
 
 // *** Контроллер прав (ApplicationController) ***
-Route::get('rights/search/form', [ApplicationController::class, 'showFormSearchRights'])->name('searchForm'); // Отображение формы(view) (поиск прав).
-Route::post('rights/search', [ApplicationController::class, 'search'])->name('search'); // Обработка - (POST) (поиск прав).
-
-Route::get('rights/form', [ApplicationController::class, 'showRightForm'])->name('rightForm'); // Отображение формы(view) (установка прав).
-Route::post('rights', [ApplicationController::class, 'AddRight'])->name('AddRight'); // Обработка - (POST) (установка прав).
-
-Route::post('user/{user}/right/{right}/finish', [ApplicationController::class, 'rightFinish'])->name('rightFinish'); // Обработка - (POST) ().
-
-
-
-
-
-
-
-
-
-
-// *** Контроллер прав (ApplicationController) ***
-Route::get('rights/search/form', [ApplicationController::class, 'showFormSearchRights'])->name('searchForm'); // Отображение формы(view) (поиск прав).
-Route::post('rights/search', [ApplicationController::class, 'search'])->name('search'); // Обработка - (POST) (поиск прав).
-
-Route::get('rights/form', [ApplicationController::class, 'showRightForm'])->name('rightForm'); // Отображение формы(view) (установка прав).
-Route::post('rights', [ApplicationController::class, 'AddRight'])->name('AddRight'); // Обработка - (POST) (установка прав).
-
-Route::post('user/{user}/right/{right}/finish', [ApplicationController::class, 'rightFinish'])->name('rightFinish'); // Обработка - (POST) ().
+Route::get('rights/search/form', [RightController::class, 'showFormSearchRights'])->name('searchForm'); // Отображение формы(view) (поиск прав).
+Route::post('rights/search', [RightController::class, 'search'])->name('search'); // Обработка - (POST) (Поиск прав).
+Route::get('rights/form', [RightController::class, 'showRightForm'])->name('rightForm'); // Отображение формы(view) (установка прав).
+Route::post('rights', [RightController::class, 'AddRight'])->name('AddRight'); // Обработка - (POST) (Установка прав).
+Route::post('user/{user}/right/{right}/finish', [RightController::class, 'rightFinish'])->name('rightFinish'); // Обработка - (POST) (Удаление права).

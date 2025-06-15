@@ -1,29 +1,11 @@
 <?php
 
-// namespace App\Http\Controllers\UserControllers;
-
-// use App\Facades\UserFacade;
-// use App\Http\Controllers\UserControllers\Values\UserCreate;
-// use Illuminate\Support\Facades\Hash;
-// class UserController extends Controller
-// {
-//     public function createUser(Request $request)
-//     {
-//         $data = $request->all();
-//         $values = new UserCreate($data['name'], $data['email'], $data['password']);
-//         $facade = new UserFacade();
-//         $facade->createUser($values);
-//     }
-// }
-
-
 namespace App\Http\Controllers\UserControllers;
 
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-
 
 class UserController extends Controller
 {
