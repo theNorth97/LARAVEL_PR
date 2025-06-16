@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Models\Right;
-use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Auth;
 
 class RightService
@@ -15,9 +15,10 @@ class RightService
         return view('rights.searchRightsUser');
     }
 
-    public function AddRight(Request $request)
+    public function AddRight()
     {
-        //
+        true;
+        //принимаю массив данных 
     }
 
     public function showFormSearchRights()
@@ -25,13 +26,13 @@ class RightService
         return view('rights.right');
     }
 
-    public function search(Request $request)
+    public function search()
     {
-        //
+        true;
     }
 
     public function rightFinish($user, $right)
     {
-        //
+        true;
     }
 }
