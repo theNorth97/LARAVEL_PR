@@ -47,7 +47,7 @@ Route::get('application/index', [ApplicationController::class, 'index'])->name('
 Route::post('application/{id}/finish', [ApplicationController::class, 'finish'])->name('appfinish'); // Обработка - (POST) (завершение заявки).
 
 // *** Контроллер прав (ApplicationController) ***
-Route::get('rights/search/form', [RightController::class, 'showFormSearchRights'])->name('searchForm'); // Отображение формы(view) (поиск прав).
+// Route::get('rights/search/form', [RightController::class, 'showFormSearchRights'])->name('searchForm'); // Отображение формы(view) (поиск прав).
 Route::post('rights/search', [RightController::class, 'search'])->name('search'); // Обработка - (POST) (Поиск прав).
 Route::get('rights/form', [RightController::class, 'showRightForm'])->name('rightForm'); // Отображение формы(view) (установка прав).
 Route::post('rights', [RightController::class, 'AddRight'])->name('AddRight'); // Обработка - (POST) (Установка прав).

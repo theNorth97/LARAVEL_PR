@@ -19,28 +19,21 @@ class RightController extends Controller
 
     public function showRightForm(Request $request)
     {
-        $this->authorize('update', Right::class); // сделать политик или ворота 
+        if (!auth()->user()->isSuperAdmin()) {
+            abort(403, 'нет доступа');
+        }
         return $this->service->showRightForm($request);
     }
 
-    public function AddRight(Request $request) // пененести толстого в сервис
+    public function AddRight(Request $request)
     {
-        $user = User::findOrFail($request->input('user_id'));
+        $userId = $request->input('user_id');
         $rightName = $request->input('right_name');
-        $right = Right::where('name', $rightName)->firstOrfail();
 
-        if (!$user->rights->contains('id', $right->id)) {
-            $user->rights()->attach([$right->id]);
-            return redirect()->route('rightForm')->with('success', 'Право успешно добавлено!');
-        } else {
-            return redirect()->route('rightForm')->with('warning', 'У пользователя есть такое право!');
-        }
+        return $this->service->AddRight($userId, $rightName);
     }
 
-    public function showFormSearchRights() // пененести в сервис
-    {
-        return view('rights.right');
-    }
+
 
     public function search(Request $request) // пененести толстого в сервис
     {

@@ -46,9 +46,6 @@ class User extends Authenticatable
         ];
     }
 
-    // массив сделать со всеми правами (права юзера) 
-    // получить права - и найти есть ли оно. 
-
     public function activeRequests()
     {
         return $this->hasMany(ActiveRequest::class);
@@ -57,5 +54,10 @@ class User extends Authenticatable
     public function rights()
     {
         return $this->belongsToMany(Right::class, 'user_right');
+    }
+
+    public function isSuperAdmin()
+    {
+        return $this->email === 'qwerty1@gmail.com';  // поменять логику проверки суперюзера, дробавить поле в таблицу  return $this->is_super_admin === true;
     }
 }

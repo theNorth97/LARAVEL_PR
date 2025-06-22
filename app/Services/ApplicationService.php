@@ -39,13 +39,4 @@ class ApplicationService
 
         return redirect()->route('dashboard')->with('success', 'заявка завершена');
     }
-
-    public function finish1(ActiveRequest $application)
-    {
-        $application->update([
-            'status' => 'finished',
-        ]);
-
-        return redirect()->route('dashboard')->with('success', 'заявка завершена');
-    }
 }

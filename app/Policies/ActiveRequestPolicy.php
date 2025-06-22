@@ -21,7 +21,6 @@ class ActiveRequestPolicy
     public function view(User $user): bool
     {
         return $user->rights->contains('name', 'can_view_apppllications'); //права на просмотр списка заявок ( кнопка заявки) 
-        // вызываю модельку юзера  , с правами готовыми.
     }
 
     /**
