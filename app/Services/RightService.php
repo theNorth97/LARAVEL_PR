@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Models\Right;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 class RightService
 {
@@ -26,18 +25,18 @@ class RightService
         }
     }
 
-    // public function showFormSearchRights()
-    // {
-    //     return view('rights.right');
-    // }
-
-    public function search()
+    public function search($userId)
     {
-        true;
+        $user = User::find($userId);
+        $rights = $user ? $user->rights : null;
+        return [$user, $rights];
     }
 
     public function rightFinish($user, $right)
     {
-        true;
+        $user = User::findOrFail($user);
+        $right = Right::findOrFail($right);
+        $user->rights()->detach($right->id);
+        return true;
     }
 }

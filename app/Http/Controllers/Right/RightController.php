@@ -33,23 +33,21 @@ class RightController extends Controller
         return $this->service->AddRight($userId, $rightName);
     }
 
-
-
-    public function search(Request $request) // пененести толстого в сервис
+    public function search(Request $request)
     {
-        if (User::where('id', $request->input('id'))->exists()) {
-            $user = User::findOrFail($request->input('id'));
-            $rights = $user->rights;
+        $userId = $request->input('id');
+        [$user, $rights] = $this->service->search($userId);
+
+        if ($user) {
             return view('rights.right', compact('user', 'rights'));
+        } else {
+            return redirect()->route('rightForm')->with('warning', 'Юзера с таким айди не существует!');
         }
-        return redirect()->route('rightForm')->with('warning', 'Юзера с таким айди не существует!');
     }
 
-    public function rightFinish($user, $right) // пененести толстого в сервис
+    public function rightFinish($user, $right)
     {
-        $user = User::findOrFail($user);
-        $right = Right::findOrFail($right);
-        $user->rights()->detach($right->id);
+        $this->service->rightFinish($user, $right);
 
         return redirect()->route('rightForm')->with('success', 'Право успешно удалено');
     }
