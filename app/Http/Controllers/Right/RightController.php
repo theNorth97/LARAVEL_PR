@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Right;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Right;
-use App\Models\User;
 use App\Services\RightService;
 
 class RightController extends Controller
@@ -46,6 +44,13 @@ class RightController extends Controller
     }
 
     public function rightFinish($user, $right)
+    {
+        $this->service->rightFinish($user, $right);
+
+        return redirect()->route('rightForm')->with('success', 'Право успешно удалено');
+    }
+
+    public function qqertyy($user, $right)
     {
         $this->service->rightFinish($user, $right);
 
