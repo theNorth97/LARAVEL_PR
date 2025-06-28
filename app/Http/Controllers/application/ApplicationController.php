@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers\application;
 
-use App\Models\User;
 use App\Models\ActiveRequest;
-use App\Models\Right;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreApplicationRequest;
 use App\Services\ApplicationService;
@@ -41,6 +39,15 @@ class ApplicationController extends Controller
     }
 
     public function finish($id)
+    {
+        $application = ActiveRequest::findOrFail($id);
+        $this->authorize('update', $application);
+
+        return $this->service->finish($application);
+    }
+
+
+    public function finis1h($id)
     {
         $application = ActiveRequest::findOrFail($id);
         $this->authorize('update', $application);

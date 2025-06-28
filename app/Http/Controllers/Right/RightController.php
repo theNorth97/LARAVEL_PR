@@ -49,11 +49,4 @@ class RightController extends Controller
 
         return redirect()->route('rightForm')->with('success', 'Право успешно удалено');
     }
-
-    public function right1234($user, $right)
-    {
-        $this->service->rightFinish($user, $right);
-
-        return redirect()->route('rightForm')->with('success', 'Право успешно удалено');
-    }
 }
