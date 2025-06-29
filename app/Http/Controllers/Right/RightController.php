@@ -49,4 +49,6 @@ class RightController extends Controller
 
         return redirect()->route('rightForm')->with('success', 'Право успешно удалено');
     }
+
+    echo 'test';
 }

@@ -45,13 +45,6 @@ class ApplicationController extends Controller
 
         return $this->service->finish($application);
     }
-
-
-    public function finis1h($id)
-    {
-        $application = ActiveRequest::findOrFail($id);
-        $this->authorize('update', $application);
-
-        return $this->service->finish($application);
-    }
 }
+
+echo 'test';

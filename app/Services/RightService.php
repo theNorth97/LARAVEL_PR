@@ -39,4 +39,7 @@ class RightService
         $user->rights()->detach($right->id);
         return true;
     }
+
+
+    echo 'test';
 }

@@ -39,4 +39,6 @@ class ApplicationService
 
         return redirect()->route('dashboard')->with('success', 'заявка завершена');
     }
+
+    echo 'test';
 }
